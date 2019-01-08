@@ -4,7 +4,7 @@ from sys import exit
 import random
 from filename import *
 import time
-
+import threading
 
 
 
@@ -48,6 +48,7 @@ t3 = pygame.image.load(touzi_3).convert_alpha()
 t4 = pygame.image.load(touzi_4).convert_alpha()
 t5 = pygame.image.load(touzi_5).convert_alpha()
 t6 = pygame.image.load(touzi_6).convert_alpha()
+threads = []
 
 
 
@@ -61,12 +62,22 @@ def tou():
     x = random.randint(1,6)
     return ('screen.blit(t'+str(x)+',(600,600))')
 
+def show(x):
+    eval(tou())
+    time.sleep(3)
+    return
+
+
+
+
+
 
 
 
 # 创建游戏循环
 while 1:
-
+    th1 = threading.Thread(target=show, args=(3,))
+    threads.append(th1)
     screen.blit(bg, (0, 0))
     # pygame模块中的事件捕捉
     for event in pygame.event.get():
@@ -107,13 +118,13 @@ while 1:
     # screen.blit(t1, (800, 600))
     pygame.mouse.set_visible(False)
     x,y = pygame.mouse.get_pos()
-    eval(tou())
+    th1.start()
 
     screen.blit(text,(800,430))
     screen.blit(yes_button,(500,600))
     screen.blit(no_button,(900,600))
     screen.blit(mouse_cursor, (x, y))
-
+    th1.join()
     # 屏幕刷新
     pygame.display.update()
 
