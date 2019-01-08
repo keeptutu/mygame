@@ -2,20 +2,24 @@ import pygame
 from pygame.locals import *
 from sys import exit
 import random
-from touzi import tou
+from filename import *
+import time
+
+
+
 
 # 图片路径
-title_icon = 'image/title.ico'
-bg_img = 'image/bg02.jpg'
-mouse = 'image/mouse.png'
-block_filename = 'image/block.png'
-block_filename2 = 'image/block_blue.png'
-# touzi1 = 'image/t1.png'
-# touzi2 = 'image/t2.png'
-# touzi3 = 'image/t3.png'
-# touzi4 = 'image/t4.png'
-# touzi5 = 'image/t5.png'
-# touzi6 = 'image/t6.png'
+# title_icon = 'image/title.ico'
+# bg_img = 'image/bg02.jpg'
+# mouse = 'image/mouse.png'
+# block_filename = 'image/block.png'
+# block_filename2 = 'image/block_blue.png'
+touzi_1 = 'image/t1.png'
+touzi_2 = 'image/t2.png'
+touzi_3 = 'image/t3.png'
+touzi_4 = 'image/t4.png'
+touzi_5 = 'image/t5.png'
+touzi_6 = 'image/t6.png'
 
 yes_filename = 'image/yes.png'
 no_filename = 'image/no.png'
@@ -34,19 +38,35 @@ pygame.display.set_icon(icon)
 bg = pygame.image.load(bg_img).convert()
 mouse_cursor = pygame.image.load(mouse).convert_alpha()
 block = pygame.image.load(block_filename).convert_alpha()
-# t1 = pygame.image.load(touzi1).convert_alpha()
 block_h = pygame.image.load(block_filename2).convert_alpha()
 yes_button = pygame.image.load(yes_filename).convert_alpha()
 no_button = pygame.image.load(no_filename).convert_alpha()
 pp = pygame.image.load(player_filename).convert_alpha()
+t1 = pygame.image.load(touzi_1).convert_alpha()
+t2 = pygame.image.load(touzi_2).convert_alpha()
+t3 = pygame.image.load(touzi_3).convert_alpha()
+t4 = pygame.image.load(touzi_4).convert_alpha()
+t5 = pygame.image.load(touzi_5).convert_alpha()
+t6 = pygame.image.load(touzi_6).convert_alpha()
+
+
 
 # 游戏文字字体
 my_font = pygame.font.Font('rex2.ttf',32)
 
-text = my_font.render(u'你好',True,(255,255,255))
+text = my_font.render('你好',True,(255,255,255))
+
+
+def tou():
+    x = random.randint(1,6)
+    return ('screen.blit(t'+str(x)+',(600,600))')
+
+
+
 
 # 创建游戏循环
 while 1:
+
     screen.blit(bg, (0, 0))
     # pygame模块中的事件捕捉
     for event in pygame.event.get():
@@ -81,11 +101,14 @@ while 1:
             screen.blit(block,(x,y))
 
     screen.blit(block_h,(288,30))
+
     screen.blit(pp,(288+7,30+5))
+
     # screen.blit(t1, (800, 600))
     pygame.mouse.set_visible(False)
     x,y = pygame.mouse.get_pos()
-    screen.blit(tou(), (800, 430))
+    eval(tou())
+
     screen.blit(text,(800,430))
     screen.blit(yes_button,(500,600))
     screen.blit(no_button,(900,600))
@@ -93,3 +116,4 @@ while 1:
 
     # 屏幕刷新
     pygame.display.update()
+

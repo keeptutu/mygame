@@ -1,0 +1,5 @@
+title_icon = 'image/title.ico'
+bg_img = 'image/bg02.jpg'
+mouse = 'image/mouse.png'
+block_filename = 'image/block.png'
+block_filename2 = 'image/block_blue.png'
