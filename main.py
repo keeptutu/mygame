@@ -1,3 +1,4 @@
+from mysprite import *
 import pygame
 from pygame.locals import *
 from sys import exit
@@ -5,6 +6,7 @@ import random
 from filename import *
 import time
 import threading
+
 
 
 
@@ -42,13 +44,9 @@ block_h = pygame.image.load(block_filename2).convert_alpha()
 yes_button = pygame.image.load(yes_filename).convert_alpha()
 no_button = pygame.image.load(no_filename).convert_alpha()
 pp = pygame.image.load(player_filename).convert_alpha()
-t1 = pygame.image.load(touzi_1).convert_alpha()
-t2 = pygame.image.load(touzi_2).convert_alpha()
-t3 = pygame.image.load(touzi_3).convert_alpha()
-t4 = pygame.image.load(touzi_4).convert_alpha()
-t5 = pygame.image.load(touzi_5).convert_alpha()
-t6 = pygame.image.load(touzi_6).convert_alpha()
-threads = []
+
+
+
 
 
 
@@ -58,27 +56,23 @@ my_font = pygame.font.Font('rex2.ttf',32)
 text = my_font.render('你好',True,(255,255,255))
 
 
-def tou():
-    x = random.randint(1,6)
-    return ('screen.blit(t'+str(x)+',(600,600))')
+framerate = pygame.time.Clock()
+dice = Mysprite(screen)
+dice.load('image/两排64.png',64,64,3)
 
-def show(x):
-    eval(tou())
-    time.sleep(3)
-    return
+group = pygame.sprite.Group()
 
-
-
-
-
-
+group.add(dice)
 
 
 # 创建游戏循环
 while 1:
-    th1 = threading.Thread(target=show, args=(3,))
-    threads.append(th1)
+    framerate.tick(60)
+    ticks = pygame.time.get_ticks()
+    print(ticks)
     screen.blit(bg, (0, 0))
+    group.update(ticks,150)
+    group.draw(screen)
     # pygame模块中的事件捕捉
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -118,13 +112,12 @@ while 1:
     # screen.blit(t1, (800, 600))
     pygame.mouse.set_visible(False)
     x,y = pygame.mouse.get_pos()
-    th1.start()
 
     screen.blit(text,(800,430))
     screen.blit(yes_button,(500,600))
     screen.blit(no_button,(900,600))
     screen.blit(mouse_cursor, (x, y))
-    th1.join()
+
     # 屏幕刷新
     pygame.display.update()
 
