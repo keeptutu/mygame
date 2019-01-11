@@ -32,32 +32,33 @@ pp = pygame.image.load(player_filename).convert_alpha()
 
 myrect1 = pygame.Rect(0,0,240,360)
 
-# 游戏文字字体
+# 游戏文字字体 设置字体和大小
 my_font = pygame.font.Font('rex2.ttf',32)
 
-text = my_font.render('你好',True,(255,255,255))
+# 文字内容和文字的颜色
+text = my_font.render('你好', True, (255, 255, 255))
 
 framerate = pygame.time.Clock()
 dice = Mysprite(screen)
-dice.load('image/两排64.png',64,64,3)
+dice.load('image/两排64.png', 64, 64, 3)
 
 group = pygame.sprite.Group()
 
 group.add(dice)
-a = MAP()
-p = Player()
-tou = False
-player_info = False
+a = MAP()  # 实例化地图块
+pl = Player()  # 实力化玩家
+tou = True  # 骰子精灵显示
+player_info = False  # 玩家信息板块
 # 创建游戏循环
 while 1:
     framerate.tick(100)
     ticks = pygame.time.get_ticks()
     # print(ticks)
-    screen.blit(bg, (0, 0))
+    screen.blit(bg, (0, 0))  # 显示背景
     if player_info is True:
         pygame.draw.rect(screen,(255,0,0),myrect1)
 
-    group.update(ticks,300)
+    group.update(ticks,100)
     if tou is True:
         group.draw(screen)
     # pygame模块中的事件捕捉
@@ -66,19 +67,20 @@ while 1:
             exit()
         if event.type == KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                exit()
+                pl.step()
+                print(pl.pos)
 
     map_show(a,screen,block)
-    screen.blit(pp,(p.pos_x,p.pos_y))
+    screen.blit(pp,(pl.pos_x,pl.pos_y))
 
     # screen.blit(t1, (800, 600))
     pygame.mouse.set_visible(False)
     x,y = pygame.mouse.get_pos()
 
-    screen.blit(text,(800,430))
-    screen.blit(yes_button,(500,600))
+    screen.blit(text,(800,430))  # 文字显示
+    screen.blit(yes_button,(500,600))  # 按钮显示
     screen.blit(no_button,(900,600))
-    screen.blit(mouse_cursor, (x, y))
+    screen.blit(mouse_cursor, (x, y))  # 鼠标的图像显示
 
     # 屏幕刷新
     pygame.display.update()
