@@ -80,22 +80,6 @@ def turn(player,block):
             player.lose()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     turn_start()
     print(turn_end())

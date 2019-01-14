@@ -1,4 +1,4 @@
-from createRect import *
+from aboutrect import *
 from gamestart import *
 from player_turn import *
 from gamadata import *
@@ -10,7 +10,7 @@ import random
 from filename import *
 import time
 
-
+kuang_filename = 'image/kuang2.png'
 yes_filename = 'image/yes.png'
 no_filename = 'image/no.png'
 player_filename = 'image/pp.png'
@@ -33,16 +33,16 @@ block_h = pygame.image.load(block_filename2).convert_alpha()
 yes_button = pygame.image.load(yes_filename).convert_alpha()
 no_button = pygame.image.load(no_filename).convert_alpha()
 pp = pygame.image.load(player_filename).convert_alpha()
-
+kuang = pygame.image.load(kuang_filename).convert_alpha()
 myrect1 = pygame.Rect((0,0),(240,360))
-
+# myrect1.move_ip(-50,-100)
 
 
 # 游戏文字字体 设置字体和大小
 my_font = pygame.font.Font('rex2.ttf',32)
 
 # 文字内容和文字的颜色
-text = my_font.render('你好', True, (255, 255, 255))
+# text = my_font.render('你好', True, (255, 255, 255))
 
 framerate = pygame.time.Clock()
 dice = Mysprite(screen)
@@ -62,6 +62,22 @@ block_list = []
 for i in range(len(a.ll)):
     exec('block_list.append(testrect'+str(i)+')')
     print(block_list)
+
+
+
+def text(words,position):
+    word = words
+    word = my_font.render(word, True, (255, 255, 255))
+    return (word,position)
+
+
+
+
+
+
+
+
+
 # 创建游戏循环
 while 1:
     framerate.tick(100)
@@ -94,12 +110,14 @@ while 1:
     # if myrect1.collidepoint(x,y):
     for i in block_list:
         if i.collidepoint(x,y):
-            pygame.draw.rect(screen, (255, 0, 0),i)
-    screen.blit(text,(800,430))  # 文字显示
+
+            screen.blit(kuang,i.topleft)
+    # screen.blit(text,(800,430))  # 文字显示
+
     screen.blit(yes_button,(500,600))  # 按钮显示
     screen.blit(no_button,(900,600))
     screen.blit(mouse_cursor, (x, y))  # 鼠标的图像显示
-    pygame.draw.rect(screen, (255, 0, 0),testrect42)
+
 
     # 屏幕刷新
     pygame.display.update()

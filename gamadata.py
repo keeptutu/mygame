@@ -33,9 +33,6 @@ class MAP:
         print(self.ll)  # 测试用输出
 
 
-
-
-
 class Player():
     def __init__(self,name='admin',money=10000,pos=0, pos_x=288+7,pos_y=30+5):
         self.name = name

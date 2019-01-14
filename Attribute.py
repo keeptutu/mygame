@@ -17,28 +17,36 @@ class Player:
 
 class Block:
     '''定义土地初始文档'''
-    def __init__(self,buymoney=2000,passmoney=0,belong=0,buildlevel=0,update_money=0):
+    def __init__(self,buymoney=2000,passmoney=0,belong=0,buildlevel=0,update_money=0,mortgage=0):
         self.belong = belong                    # 土地归属 0(无人) 1(玩家1) 2(玩家2)
         self.buymoney = buymoney                # 初始土地价格
         self.buildlevel = buildlevel            # 建筑等级
         self.passmoney = passmoney              # 过路费
         self.update_money = update_money        # 土地升级费
-
+        self.mortgage = mortgage
 
 def buy_block(player,block):
     player.momey -= block.buymoney
     block.belong = player.belong
+    block.mortgage += 0.5 * block.buymoney
+
 
 def block_build(player,block):
     player.money -= block.update_money
     block.buildlevel += 1
+    block.mortgage += 0.5 * block.update_money
 
 def pay_passmoney(payplayer,getplayer,block):
     payplayer.money -= block.passmoney
     getplayer.money += block.passmoney
 
-def mortgage(player,block):
-    
+
+
+
+
+
+# def mortgage(player,block):
+
 
 
 
