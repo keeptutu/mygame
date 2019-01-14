@@ -27,7 +27,7 @@ class MAP:
                 x += 64 * (41 - i)
                 self.ll.append((x, y))
             else:
-                y -= 64 * (41 - i)
+                y += 64 * (41 - i) + 704
                 x = 288
                 self.ll.append((x, y))
         print(self.ll)  # 测试用输出
@@ -83,7 +83,6 @@ class Player():
 def map_show(maps,screen,block):
     for i in range(52):
         screen.blit(block,maps.ll[i])
-
 
 
 

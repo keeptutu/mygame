@@ -1,5 +1,5 @@
 players = ['player1','player2','player3','player4']
-
+player = 'player1'
 
 def turn_start():
     global player
@@ -23,14 +23,22 @@ def turn_end():
         player = players[0]
         return player
 
+
 def tou():
     pass
+
+
 def jianzao():
     pass
+
+
 def button_for_turnend():
     turn_end()
+
+
 def buy_block():
     pass
+
 
 def turn(player,block):
     tou()
@@ -40,13 +48,14 @@ def turn(player,block):
                 if jianzao():
                     player.money -= block.update_money
                     block.buildlevel += 1
+
                 else:
                     button_for_turnend()
             else:
                 button_for_turnend()
         else:
             button_for_turnend()
-    elif block.belong == 'None':
+    elif block.belong == 0:
         if player.money >= block.buymoney:
             if buy_block():
                 player.money -= block.buymoney

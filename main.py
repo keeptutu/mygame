@@ -1,3 +1,4 @@
+from createRect import *
 from gamestart import *
 from player_turn import *
 from gamadata import *
@@ -8,7 +9,6 @@ from sys import exit
 import random
 from filename import *
 import time
-
 
 
 yes_filename = 'image/yes.png'
@@ -34,7 +34,9 @@ yes_button = pygame.image.load(yes_filename).convert_alpha()
 no_button = pygame.image.load(no_filename).convert_alpha()
 pp = pygame.image.load(player_filename).convert_alpha()
 
-myrect1 = pygame.Rect(0,0,240,360)
+myrect1 = pygame.Rect((0,0),(240,360))
+
+
 
 # 游戏文字字体 设置字体和大小
 my_font = pygame.font.Font('rex2.ttf',32)
@@ -53,10 +55,13 @@ a = MAP()  # 实例化地图块
 pl = Player()  # 实力化玩家
 tou = True  # 骰子精灵显示
 player_info = True  # 玩家信息板块
-
-
-
-
+for i in createrect(a.ll):
+    print(i)
+    exec(i)
+block_list = []
+for i in range(len(a.ll)):
+    exec('block_list.append(testrect'+str(i)+')')
+    print(block_list)
 # 创建游戏循环
 while 1:
     framerate.tick(100)
@@ -65,6 +70,7 @@ while 1:
     screen.blit(bg, (0, 0))  # 显示背景
     if player_info is True:
         pygame.draw.rect(screen,(255,0,0),myrect1)
+
 
     group.update(ticks,100)
     if tou is True:
@@ -75,7 +81,7 @@ while 1:
             exit()
         if event.type == KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                if is_my_turn(turnplayer):
+                if is_my_turn(player):
                     pl.step()
                     print(pl.pos)
 
@@ -85,11 +91,15 @@ while 1:
     # screen.blit(t1, (800, 600))
     pygame.mouse.set_visible(False)
     x,y = pygame.mouse.get_pos()
-
+    # if myrect1.collidepoint(x,y):
+    for i in block_list:
+        if i.collidepoint(x,y):
+            pygame.draw.rect(screen, (255, 0, 0),i)
     screen.blit(text,(800,430))  # 文字显示
     screen.blit(yes_button,(500,600))  # 按钮显示
     screen.blit(no_button,(900,600))
     screen.blit(mouse_cursor, (x, y))  # 鼠标的图像显示
+    pygame.draw.rect(screen, (255, 0, 0),testrect42)
 
     # 屏幕刷新
     pygame.display.update()
