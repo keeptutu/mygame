@@ -1,4 +1,8 @@
 import random
+'''
+地图块类及生成显示
+玩家类及玩家移动
+'''
 
 
 #  创建地图类
@@ -11,6 +15,7 @@ class MAP:
             if i < 16:
                 x += 64 * i
                 self.ll.append((x,y))
+
 
             elif i < 26:
                 x = 15 * 64 + 288
@@ -26,6 +31,9 @@ class MAP:
                 x = 288
                 self.ll.append((x, y))
         print(self.ll)  # 测试用输出
+
+
+
 
 
 class Player():

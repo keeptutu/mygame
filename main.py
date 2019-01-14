@@ -1,3 +1,5 @@
+from gamestart import *
+from player_turn import *
 from gamadata import *
 from mysprite import *
 import pygame
@@ -8,10 +10,12 @@ from filename import *
 import time
 
 
+
 yes_filename = 'image/yes.png'
 no_filename = 'image/no.png'
 player_filename = 'image/pp.png'
 # pygame模块初始化
+game_start()
 pygame.init()
 # 屏幕创建
 screen = pygame.display.set_mode((1600,860),0,32)
@@ -48,7 +52,11 @@ group.add(dice)
 a = MAP()  # 实例化地图块
 pl = Player()  # 实力化玩家
 tou = True  # 骰子精灵显示
-player_info = False  # 玩家信息板块
+player_info = True  # 玩家信息板块
+
+
+
+
 # 创建游戏循环
 while 1:
     framerate.tick(100)
@@ -67,8 +75,9 @@ while 1:
             exit()
         if event.type == KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                pl.step()
-                print(pl.pos)
+                if is_my_turn(turnplayer):
+                    pl.step()
+                    print(pl.pos)
 
     map_show(a,screen,block)
     screen.blit(pp,(pl.pos_x,pl.pos_y))
