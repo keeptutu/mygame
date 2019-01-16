@@ -77,8 +77,6 @@ def show_button(pic,screen,pos): # 创建一个函数用于在屏幕上显示按
     screen.blit(pics,pos)
     rect = pygame.Rect(pos,(pics.get_size()))
     return rect  # 这个函数在进行了按钮图像的显示后返回了一个按钮的rect对象 方便其他使用
-
-
 # 此处可以设置循环外部条件  用作循环内的条件控制
 tou = True  # 骰子精灵显示
 player_info = True  # 玩家信息板块
