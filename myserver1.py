@@ -99,12 +99,16 @@ class TcpServer():
             s = '%s发送给我的信息是:%s' % (str(address), data.decode('utf8'))
             # 将获得的消息分发给链接中的client socket
             for k in self.clients:
-                if k != client:
+                print('-----',k,'-----')
+                print('+++++',client,'+++++')
+                print('-----',self.addr,'-----')
+                if k != self.addr:
                     self.clients[k].send(s.encode('utf8'))
-                    self.clients[k].sendall(('sendall:' + s).encode())
+
+                    # self.clients[k].sendall(('sendall:' + s).encode())
                     # print(str(k))
-                    print(k)
-            print([ctime], ':', data.decode('utf8'))
+
+            print([ctime()], ':', data.decode('utf8'))
             # 如果输入quit(忽略大小写),则程序退出
             STOP_CHAT = (data.decode('utf8').upper() == "QUIT")
             if STOP_CHAT:

@@ -6,8 +6,8 @@ def turn_start():
     player = 'player1'
 
 
-def is_my_turn(pp):
-    if pp == 'player1':
+def is_my_turn(nowplayer):
+    if nowplayer == player:
         return True
 
     else:
